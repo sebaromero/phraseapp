@@ -1,6 +1,10 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import ActionButton from '../../presentation/components/ActionButton'
+import ActionButton from '../presentation/components/ActionButton'
+
+jest.mock('lucide-react', () => ({
+  Loader2: () => <svg data-testid="loader" />,
+}))
 
 const MockIcon = () => (
   <svg data-testid="icon">

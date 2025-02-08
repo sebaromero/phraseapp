@@ -1,3 +1,4 @@
+import { Loader2 } from 'lucide-react'
 import { ReactNode } from 'react'
 
 interface IActionButton {
@@ -23,7 +24,7 @@ const ActionButton = ({
       title={title || ariaLabel}
       disabled={disabled}
     >
-      {icon}
+      {disabled ? <Loader2 className="animate-spin" /> : icon}
     </button>
   )
 }

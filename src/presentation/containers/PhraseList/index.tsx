@@ -1,0 +1,44 @@
+import { memo, useEffect, useState } from 'react'
+import PhraseCard from '../../components/PhraseCard'
+import Skeleton from '../../components/Skeleton'
+import EmptyState from '../../components/EmptyState'
+import { IPhrase } from '../../../core/Phrase/phrase'
+
+interface IPhraseList {
+  phrases: IPhrase[]
+  isLoading: boolean
+  onDelete: (id: string) => void
+}
+
+const PhraseList = ({ phrases, isLoading, onDelete }: IPhraseList) => {
+  const [loadingState, setLoadingState] = useState(true)
+
+  useEffect(() => {
+    if (!isLoading) {
+      setTimeout(() => setLoadingState(false), 300)
+    }
+  }, [isLoading])
+
+  return (
+    <section className="w-full max-w-3xl mx-auto" aria-live="polite">
+      {loadingState && <Skeleton />}
+      {phrases.length > 0 ? (
+        <div className="grid gap-4">
+          {phrases.map((phrase) => (
+            <PhraseCard
+              key={phrase.id}
+              text={phrase.text}
+              author={phrase.author}
+              onDelete={() => onDelete(phrase.id)}
+              isDeleting={false}
+            />
+          ))}
+        </div>
+      ) : (
+        <EmptyState />
+      )}
+    </section>
+  )
+}
+
+export default memo(PhraseList)

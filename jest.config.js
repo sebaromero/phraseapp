@@ -5,6 +5,5 @@ export default {
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
     '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
-    '^lucide-react$': '<rootDir>/__mocks__/lucide-react.tsx',
   },
 }

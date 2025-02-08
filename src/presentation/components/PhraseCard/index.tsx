@@ -1,13 +1,14 @@
 import { Trash2 } from 'lucide-react'
 import ActionButton from '../ActionButton'
 
-interface PhraseCardProps {
-  text: string
+interface IPhraseCard {
   author?: string | null
+  isDeleting: boolean
   onDelete: VoidFunction
+  text: string
 }
 
-const PhraseCard = ({ text, author, onDelete }: PhraseCardProps) => {
+const PhraseCard = ({ author, isDeleting, text, onDelete }: IPhraseCard) => {
   return (
     <div
       role="article"
@@ -24,6 +25,7 @@ const PhraseCard = ({ text, author, onDelete }: PhraseCardProps) => {
           icon={<Trash2 />}
           onClick={onDelete}
           ariaLabel="Eliminar frase"
+          disabled={isDeleting}
         />
       </div>
     </div>
