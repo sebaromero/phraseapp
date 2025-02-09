@@ -28,7 +28,7 @@ const PhraseList = ({
   if (loadingState) return <Skeleton />
 
   return (
-    <section className="w-full max-w-3xl mx-auto" aria-live="polite">
+    <section className="w-full mx-auto" aria-live="polite">
       {phrases.length > 0 ? (
         <div className="grid gap-4">
           {phrases.map((phrase) => (

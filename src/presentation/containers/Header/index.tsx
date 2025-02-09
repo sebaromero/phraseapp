@@ -11,7 +11,7 @@ interface IHeader {
 
 const Header = ({ searchValue, onSearchChange, onAddPhrase }: IHeader) => {
   return (
-    <header className="w-full flex items-center gap-2 p-4 border-gray-300 shadow-md bg-white">
+    <header className="w-full flex items-center gap-2 p-4 border rounded-md border-gray-300 bg-white">
       <Input
         id="search-phrases"
         label="Buscar frases"

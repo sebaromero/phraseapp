@@ -8,7 +8,7 @@ const Layout = ({ children }: ILayout) => {
       <main
         role="main"
         aria-labelledby="page-title"
-        className="w-full max-w-5xl bg-white p-6"
+        className="w-full max-w-5xl bg-white"
       >
         {children}
       </main>

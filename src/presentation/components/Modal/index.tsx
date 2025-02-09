@@ -17,14 +17,14 @@ const Modal = ({ isOpen, onClose, title, children }: IModal) => {
 
   return (
     <div
-      className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
+      className="fixed inset-0 bg-black/60 flex items-center justify-center z-50"
       role="dialog"
       aria-modal="true"
       aria-labelledby="modal-title"
       onClick={onClose}
     >
       <div
-        className="bg-white rounded-md shadow-lg max-w-md w-full p-4 relative"
+        className="bg-white rounded-md shadow-lg max-w-md w-full p-4 relative m-2"
         onClick={(e) => e.stopPropagation()}
       >
         <h2 id="modal-title" className="text-xl font-semibold text-gray-900">
