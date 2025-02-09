@@ -6,7 +6,7 @@ import { Plus } from 'lucide-react'
 interface IHeader {
   searchValue: string
   onSearchChange: (value: string) => void
-  onAddPhrase: (text: string, author?: string | undefined) => void
+  onAddPhrase: VoidFunction
 }
 
 const Header = ({ searchValue, onSearchChange, onAddPhrase }: IHeader) => {
@@ -20,12 +20,15 @@ const Header = ({ searchValue, onSearchChange, onAddPhrase }: IHeader) => {
         onChangeValue={onSearchChange}
         role="searchbox"
       />
-      <ActionButton
-        ariaLabel="Agregar frase"
-        title="Agregar frase"
-        icon={<Plus />}
-        onClick={onAddPhrase}
-      />
+      <div className="flex self-end w-auto">
+        <ActionButton
+          ariaLabel="Agregar frase"
+          title="Agregar frase"
+          icon={<Plus />}
+          onClick={onAddPhrase}
+          text="Agregar"
+        />
+      </div>
     </header>
   )
 }

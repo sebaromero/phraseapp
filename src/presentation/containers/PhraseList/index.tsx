@@ -25,9 +25,10 @@ const PhraseList = ({
     }
   }, [isLoading])
 
+  if (loadingState) return <Skeleton />
+
   return (
     <section className="w-full max-w-3xl mx-auto" aria-live="polite">
-      {loadingState && <Skeleton />}
       {phrases.length > 0 ? (
         <div className="grid gap-4">
           {phrases.map((phrase) => (
@@ -36,7 +37,7 @@ const PhraseList = ({
               text={phrase.text}
               author={phrase.author}
               onDelete={() => onDelete(phrase.id)}
-              isDeleting={isDeleting.includes(phrase.id)}
+              isDeleting={isDeleting?.includes(phrase.id)}
             />
           ))}
         </div>

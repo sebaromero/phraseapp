@@ -31,13 +31,3 @@ export const ClosedModal: Story = {
     onAdd: () => {},
   },
 }
-
-export const WithNoAuthor: Story = {
-  args: {
-    isOpen: true,
-    onClose: () => {},
-    onAdd: (text: string) => {
-      console.log('Phrase added:', text)
-    },
-  },
-}

@@ -46,6 +46,7 @@ const AddPhrase = ({ isOpen, onClose, onAdd }: IAddPhrase) => {
             onClick={handleAddPhrase}
             ariaLabel="Agregar frase"
             title="Agregar frase"
+            text="Agregar frase"
           />
         </div>
       </div>
