@@ -1,22 +1,36 @@
 import { memo } from 'react'
+import { BookOpenText, SearchX } from 'lucide-react'
+import { usePhraseStore } from '../../../store/phraseStore'
 import PhraseCard from '../../components/PhraseCard'
 import EmptyState from '../../components/EmptyState'
 import filterPhrases from '../../../utils/filterPhrases'
-import { usePhraseStore } from '../../../store/phraseStore'
 
 const PhraseList = () => {
   const { phrases, deletingIds, searchQuery, removePhrase } = usePhraseStore()
   const filteredPhrases = filterPhrases(phrases, searchQuery)
 
   if (!phrases.length) {
-    return <EmptyState />
+    return (
+      <EmptyState
+        icon={
+          <BookOpenText
+            className="w-12 h-12 text-gray-400"
+            aria-hidden="true"
+          />
+        }
+        text="Aún no hay frases. Agrega una para comenzar."
+      />
+    )
   }
 
   if (!filteredPhrases.length) {
     return (
-      <div className="text-center text-gray-500 mt-6">
-        <p>No se encontraron resultados para tu búsqueda.</p>
-      </div>
+      <EmptyState
+        icon={
+          <SearchX className="w-12 h-12 text-gray-400" aria-hidden="true" />
+        }
+        text="No se encontraron resultados para tu búsqueda."
+      />
     )
   }
 

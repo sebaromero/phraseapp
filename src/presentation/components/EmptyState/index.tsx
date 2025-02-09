@@ -1,15 +1,20 @@
-import { BookOpenText } from 'lucide-react'
+import { JSX } from 'react'
 
-const EmptyState = () => {
+interface IEmptyState {
+  icon: JSX.Element
+  text: string
+}
+
+const EmptyState = ({ icon, text }: IEmptyState) => {
   return (
     <section role="status" aria-live="polite">
       <figure
         aria-labelledby="empty-state-message"
         className="flex flex-col items-center justify-center text-center py-8"
       >
-        <BookOpenText className="w-12 h-12 text-gray-400" aria-hidden="true" />
+        {icon}
         <figcaption id="empty-state-message" className="text-gray-500 mt-2">
-          No hay frases aún. Agrega una para empezar.
+          {text}
         </figcaption>
       </figure>
     </section>
