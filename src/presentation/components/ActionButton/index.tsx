@@ -1,11 +1,10 @@
 import { Loader2 } from 'lucide-react'
 import { ReactNode } from 'react'
 
-interface IActionButton {
+interface IActionButton extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   ariaLabel?: string
   disabled?: boolean
   icon: ReactNode
-  onClick: VoidFunction
   title?: string
   text?: string
 }
@@ -14,14 +13,13 @@ const ActionButton = ({
   ariaLabel = 'Ejecutar acción',
   disabled = false,
   icon,
-  onClick,
   title,
   text,
+  ...props
 }: IActionButton) => {
   return (
     <button
-      type="button"
-      onClick={onClick}
+      {...props}
       aria-label={ariaLabel}
       title={title || ariaLabel}
       disabled={disabled}

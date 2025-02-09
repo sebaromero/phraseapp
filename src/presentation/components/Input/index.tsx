@@ -2,16 +2,16 @@ import { memo, useDeferredValue } from 'react'
 
 interface IInput extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string
-  onChangeValue: (value: string) => void
   description?: string
   useDeferred?: boolean
+  error?: string
 }
 
 const Input = ({
   label,
-  onChangeValue,
   description,
   useDeferred = false,
+  error,
   ...props
 }: IInput) => {
   const deferredValue = useDeferred
@@ -32,11 +32,16 @@ const Input = ({
       <input
         {...props}
         value={deferredValue}
-        onChange={(e) => onChangeValue(e.target.value)}
         aria-label={props['aria-label'] || label}
         aria-describedby={description ? `${props.id}-desc` : undefined}
-        className="w-full p-2 border rounded border-gray-300"
+        className={`w-full p-2 border rounded border-gray-300 focus:outline-none 
+              ${error ? 'border-red-500 focus:border-red-500' : 'focus:border-black'}`}
       />
+      {error && (
+        <p className="text-sm text-red-500 mt-1" role="alert">
+          {error}
+        </p>
+      )}
     </fieldset>
   )
 }

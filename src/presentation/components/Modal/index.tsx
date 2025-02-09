@@ -30,9 +30,10 @@ const Modal = ({ isOpen, onClose, title, children }: IModal) => {
         </h2>
         <div className="absolute right-4 top-4">
           <ActionButton
+            ariaLabel="Cerrar modal"
             icon={<X />}
             onClick={onClose}
-            ariaLabel="Cerrar modal"
+            type="button"
           />
         </div>
         <div className="mt-8">{children}</div>

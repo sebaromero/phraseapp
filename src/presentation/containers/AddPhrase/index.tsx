@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useForm } from 'react-hook-form'
 import { Plus } from 'lucide-react'
 import Input from '../../components/Input'
 import ActionButton from '../../components/ActionButton'
@@ -10,46 +10,55 @@ interface IAddPhrase {
   onAdd: (text: string, author?: string) => void
 }
 
-const AddPhrase = ({ isOpen, onClose, onAdd }: IAddPhrase) => {
-  const [text, setText] = useState('')
-  const [author, setAuthor] = useState('')
+interface IFormData {
+  text: string
+  author?: string
+}
 
-  const handleAddPhrase = () => {
-    if (text.trim()) {
-      onAdd(text, author)
-      setText('')
-      setAuthor('')
-      onClose()
-    }
+const AddPhrase = ({ isOpen, onClose, onAdd }: IAddPhrase) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<IFormData>()
+
+  const onSubmit = (data: { text: string; author?: string }) => {
+    onAdd(data.text, data.author)
+    reset()
+    onClose()
+  }
+
+  const handleClose = () => {
+    reset()
+    onClose()
   }
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} title="Agregar nueva frase">
-      <div className="flex flex-col gap-4">
+    <Modal isOpen={isOpen} onClose={handleClose} title="Agregar nueva frase">
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
         <Input
-          value={text}
-          label=""
-          onChangeValue={setText}
+          label="Frase"
           placeholder="Escribe una nueva frase"
-          aria-label="Nueva frase"
+          {...register('text', { required: 'La frase es obligatoria.' })}
+          error={errors?.text?.message}
         />
         <Input
-          value={author}
-          label=""
-          onChangeValue={setAuthor}
+          label="Autor"
           placeholder="Autor (opcional)"
           aria-label="Autor"
+          {...register('author')}
         />
         <div className="flex justify-end">
           <ActionButton
             icon={<Plus />}
-            onClick={handleAddPhrase}
             ariaLabel="Agregar frase"
             title="Agregar frase"
             text="Agregar frase"
+            type="submit"
           />
         </div>
-      </div>
+      </form>
     </Modal>
   )
 }

@@ -23,10 +23,11 @@ const PhraseCard = ({ author, isDeleting, text, onDelete }: IPhraseCard) => {
       <p className="mt-2 text-sm text-gray-500">- {author || 'Anónimo'}</p>
       <div className="absolute top-2 right-2">
         <ActionButton
-          icon={<Trash2 />}
-          onClick={onDelete}
           ariaLabel="Eliminar frase"
           disabled={isDeleting}
+          icon={<Trash2 />}
+          onClick={onDelete}
+          type="button"
         />
       </div>
     </div>
