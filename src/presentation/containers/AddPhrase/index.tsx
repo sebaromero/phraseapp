@@ -47,6 +47,7 @@ const AddPhrase = ({ isOpen, onClose, onAdd }: IAddPhrase) => {
           label="Autor"
           placeholder="Autor (opcional)"
           aria-label="Autor"
+          description='Si no agregas un autor, se mostrará como "Anónimo"'
           {...register('author')}
         />
         <div className="flex justify-end">

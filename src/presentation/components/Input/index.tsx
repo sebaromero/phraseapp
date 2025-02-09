@@ -21,11 +21,11 @@ const Input = ({
   return (
     <fieldset className="w-full">
       <legend className="sr-only">{label}</legend>
-      <label htmlFor={props.id} className="block text-md font-medium mb-1">
+      <label htmlFor={props.id} className="block text-lg font-medium mb-1">
         {label}
       </label>
       {description && (
-        <p id={`${props.id}-desc`} className="text-xs text-gray-500 mb-1">
+        <p id={`${props.id}-desc`} className="text-sm text-gray-500 mb-1">
           {description}
         </p>
       )}
@@ -38,7 +38,7 @@ const Input = ({
               ${error ? 'border-red-500 focus:border-red-500' : 'focus:border-black'}`}
       />
       {error && (
-        <p className="text-sm text-red-500 mt-1" role="alert">
+        <p className="text-md text-red-500 mt-1" role="alert">
           {error}
         </p>
       )}
