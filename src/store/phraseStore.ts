@@ -6,6 +6,7 @@ export const usePhraseStore = create<IPhraseState>((set) => ({
   phrases: [],
   isLoading: false,
   deletingIds: [],
+  searchQuery: '',
 
   addPhrase: (text, author) => {
     const newPhrase: IPhrase = { id: crypto.randomUUID(), text, author }
@@ -28,4 +29,5 @@ export const usePhraseStore = create<IPhraseState>((set) => ({
   },
 
   setLoading: (loading) => set(() => ({ isLoading: loading })),
+  setSearch: (query) => set(() => ({ searchQuery: query })),
 }))

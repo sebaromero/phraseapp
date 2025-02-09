@@ -6,12 +6,12 @@ import { Plus } from 'lucide-react'
 interface IHeader {
   searchValue: string
   onSearchChange: (value: string) => void
-  onAddPhrase: () => void
+  onAddPhrase: (text: string, author?: string | undefined) => void
 }
 
 const Header = ({ searchValue, onSearchChange, onAddPhrase }: IHeader) => {
   return (
-    <header className="w-full flex items-center gap-2 p-4 border-b dark:border-gray-700">
+    <header className="w-full flex items-center gap-2 p-4 border-gray-300 shadow-md bg-white">
       <Input
         id="search-phrases"
         label="Buscar frases"

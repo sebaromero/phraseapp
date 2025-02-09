@@ -12,14 +12,10 @@ const PhraseCard = ({ author, isDeleting, text, onDelete }: IPhraseCard) => {
   return (
     <div
       role="article"
-      className="relative p-4 rounded-lg border border-gray-300 dark:border-gray-700 shadow-md bg-white dark:bg-gray-800"
+      className="relative p-4 rounded-md border border-gray-300 shadow-md bg-white"
     >
-      <p className="text-lg font-semibold text-gray-900 dark:text-white">
-        "{text}"
-      </p>
-      <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
-        - {author || 'Anónimo'}
-      </p>
+      <p className="text-lg font-semibold text-gray-900">"{text}"</p>
+      <p className="mt-2 text-sm text-gray-500">- {author || 'Anónimo'}</p>
       <div className="absolute top-2 right-2">
         <ActionButton
           icon={<Trash2 />}

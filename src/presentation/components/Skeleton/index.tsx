@@ -10,7 +10,7 @@ const LoadingState = () => {
         <div
           key={i}
           data-testid="skeleton"
-          className="h-20 bg-gray-200 dark:bg-gray-700 rounded-lg animate-pulse"
+          className="h-20 bg-gray-300 rounded-lg animate-pulse"
           aria-hidden="true"
         ></div>
       ))}

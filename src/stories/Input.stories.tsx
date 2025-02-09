@@ -52,7 +52,7 @@ export const Email: Story = {
 export const Disabled: Story = {
   args: {
     id: 'disabled-input',
-    label: 'Campo deshabilitada',
+    label: 'Campo deshabilitado',
     placeholder: 'No puedes ingresar ningun valor',
     disabled: true,
   },

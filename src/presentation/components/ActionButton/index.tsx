@@ -23,6 +23,7 @@ const ActionButton = ({
       aria-label={ariaLabel}
       title={title || ariaLabel}
       disabled={disabled}
+      className="border-gray-300 border-1 rounded p-2 bg-gray-100 hover:bg-gray-200"
     >
       {disabled ? <Loader2 className="animate-spin" /> : icon}
     </button>

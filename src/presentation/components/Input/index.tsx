@@ -21,17 +21,11 @@ const Input = ({
   return (
     <fieldset className="w-full">
       <legend className="sr-only">{label}</legend>
-      <label
-        htmlFor={props.id}
-        className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-      >
+      <label htmlFor={props.id} className="block text-md font-medium mb-1">
         {label}
       </label>
       {description && (
-        <p
-          id={`${props.id}-desc`}
-          className="text-xs text-gray-500 dark:text-gray-400"
-        >
+        <p id={`${props.id}-desc`} className="text-xs text-gray-500 mb-1">
           {description}
         </p>
       )}
@@ -41,7 +35,7 @@ const Input = ({
         onChange={(e) => onChangeValue(e.target.value)}
         aria-label={props['aria-label'] || label}
         aria-describedby={description ? `${props.id}-desc` : undefined}
-        className="w-full p-2 border rounded-lg dark:bg-gray-800 dark:text-white"
+        className="w-full p-2 border rounded border-gray-300"
       />
     </fieldset>
   )

@@ -24,17 +24,20 @@ const Modal = ({ isOpen, onClose, title, children }: IModal) => {
       onClick={onClose}
     >
       <div
-        className="bg-white dark:bg-gray-900 rounded-lg shadow-lg max-w-md w-full p-6 relative"
+        className="bg-white rounded-md shadow-lg max-w-md w-full p-4 relative"
         onClick={(e) => e.stopPropagation()}
       >
-        <h2
-          id="modal-title"
-          className="text-xl font-semibold text-gray-900 dark:text-white"
-        >
+        <h2 id="modal-title" className="text-xl font-semibold text-gray-900">
           {title}
         </h2>
-        <ActionButton icon={<X />} onClick={onClose} ariaLabel="Cerrar modal" />
-        <div className="mt-4">{children}</div>
+        <div className="absolute right-4 top-4">
+          <ActionButton
+            icon={<X />}
+            onClick={onClose}
+            ariaLabel="Cerrar modal"
+          />
+        </div>
+        <div className="mt-8">{children}</div>
       </div>
     </div>
   )
