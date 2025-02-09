@@ -1,9 +1,18 @@
-import './App.css'
+import { usePhraseStore } from '../../store/phraseStore'
+import PhraseList from '../containers/PhraseList'
 
 function App() {
+  const { phrases, isLoading, deletingIds, addPhrase, removePhrase } =
+    usePhraseStore()
+
   return (
     <>
-      <h1 className="text-primary">Vite + React</h1>
+      <PhraseList
+        phrases={phrases}
+        isLoading={isLoading}
+        onDelete={removePhrase}
+        isDeleting={deletingIds}
+      />
     </>
   )
 }

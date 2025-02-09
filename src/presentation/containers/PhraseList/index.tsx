@@ -8,9 +8,15 @@ interface IPhraseList {
   phrases: IPhrase[]
   isLoading: boolean
   onDelete: (id: string) => void
+  isDeleting: string[]
 }
 
-const PhraseList = ({ phrases, isLoading, onDelete }: IPhraseList) => {
+const PhraseList = ({
+  phrases,
+  isLoading,
+  onDelete,
+  isDeleting,
+}: IPhraseList) => {
   const [loadingState, setLoadingState] = useState(true)
 
   useEffect(() => {
@@ -30,7 +36,7 @@ const PhraseList = ({ phrases, isLoading, onDelete }: IPhraseList) => {
               text={phrase.text}
               author={phrase.author}
               onDelete={() => onDelete(phrase.id)}
-              isDeleting={false}
+              isDeleting={isDeleting.includes(phrase.id)}
             />
           ))}
         </div>

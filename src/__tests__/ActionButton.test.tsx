@@ -13,14 +13,14 @@ const MockIcon = () => (
 )
 
 describe('ActionButton', () => {
-  it('Icon renders correctly', () => {
+  it('icon renders correctly', () => {
     render(<ActionButton icon={<MockIcon />} onClick={() => {}} />)
 
     const icon = screen.getByTestId('icon')
     expect(icon).toBeInTheDocument()
   })
 
-  it('Calls onClick function when button is clicked', () => {
+  it('calls onClick function when button is clicked', () => {
     const handleClick = jest.fn()
     render(
       <ActionButton
@@ -36,7 +36,7 @@ describe('ActionButton', () => {
     expect(handleClick).toHaveBeenCalledTimes(1)
   })
 
-  it('Not calls onClick function when button is disabled', () => {
+  it('not calls onClick function when button is disabled', () => {
     const handleClick = jest.fn()
     render(
       <ActionButton
