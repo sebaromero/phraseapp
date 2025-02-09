@@ -12,6 +12,8 @@ const MockIcon = () => (
   </svg>
 )
 
+const handleClick = jest.fn()
+
 describe('ActionButton', () => {
   it('icon renders correctly', () => {
     render(<ActionButton icon={<MockIcon />} onClick={() => {}} />)
@@ -21,7 +23,6 @@ describe('ActionButton', () => {
   })
 
   it('calls onClick function when button is clicked', () => {
-    const handleClick = jest.fn()
     render(
       <ActionButton
         icon={<MockIcon />}
@@ -37,7 +38,6 @@ describe('ActionButton', () => {
   })
 
   it('not calls onClick function when button is disabled', () => {
-    const handleClick = jest.fn()
     render(
       <ActionButton
         icon={<MockIcon />}
@@ -52,5 +52,19 @@ describe('ActionButton', () => {
 
     expect(handleClick).not.toHaveBeenCalled()
     expect(button).toBeDisabled()
+  })
+
+  it('text renders when you add a button text', () => {
+    render(
+      <ActionButton
+        icon={<MockIcon />}
+        onClick={handleClick}
+        ariaLabel="Agregar"
+        text="Agregar"
+      />,
+    )
+
+    const text = screen.getByText('Agregar')
+    expect(text).toBeInTheDocument()
   })
 })

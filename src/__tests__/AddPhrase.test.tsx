@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import AddPhrase from '../presentation/containers/AddPhrase'
 
@@ -12,6 +12,10 @@ const mockOnAdd = jest.fn()
 const mockOnClose = jest.fn()
 
 describe('AddPhrase', () => {
+  beforeEach(() => {
+    jest.clearAllMocks()
+  })
+
   it('should render correctly when open', () => {
     render(<AddPhrase isOpen={true} onClose={mockOnClose} onAdd={mockOnAdd} />)
 
@@ -21,48 +25,46 @@ describe('AddPhrase', () => {
     expect(screen.getByPlaceholderText('Autor (opcional)')).toBeInTheDocument()
   })
 
-  it('should call onAdd when the button is clicked', () => {
-    render(<AddPhrase isOpen={true} onClose={mockOnClose} onAdd={mockOnAdd} />)
+  it('should not render when closed', () => {
+    render(<AddPhrase isOpen={false} onClose={mockOnClose} onAdd={mockOnAdd} />)
 
-    fireEvent.change(screen.getByPlaceholderText('Escribe una nueva frase'), {
-      target: { value: 'Nueva frase' },
-    })
-    fireEvent.change(screen.getByPlaceholderText('Autor (opcional)'), {
-      target: { value: 'Autor Test' },
-    })
-    fireEvent.click(screen.getByTitle('Agregar frase'))
-
-    expect(mockOnAdd).toHaveBeenCalledWith('Nueva frase', 'Autor Test')
-    expect(mockOnClose).toHaveBeenCalled()
+    expect(screen.queryByPlaceholderText('Escribe una nueva frase')).toBeNull()
   })
 
-  it('should not call onAdd if the input text is empty', () => {
+  it('should show error when submitting without text', async () => {
     render(<AddPhrase isOpen={true} onClose={mockOnClose} onAdd={mockOnAdd} />)
 
-    fireEvent.change(screen.getByPlaceholderText('Escribe una nueva frase'), {
-      target: { value: '' },
-    })
-    fireEvent.click(screen.getByTitle('Agregar frase'))
+    fireEvent.click(screen.getByText('Agregar frase'))
 
+    expect(
+      await screen.findByText('La frase es obligatoria.'),
+    ).toBeInTheDocument()
     expect(mockOnAdd).not.toHaveBeenCalled()
-    expect(mockOnClose).not.toHaveBeenCalled()
   })
 
-  it('should reset inputs after adding a phrase', () => {
+  it('should call onAdd and close modal on valid submission', async () => {
     render(<AddPhrase isOpen={true} onClose={mockOnClose} onAdd={mockOnAdd} />)
 
-    const phraseInput = screen.getByPlaceholderText(
-      'Escribe una nueva frase',
-    ) as HTMLInputElement
-    const authorInput = screen.getByPlaceholderText(
-      'Autor (opcional)',
-    ) as HTMLInputElement
+    fireEvent.change(screen.getByPlaceholderText('Escribe una nueva frase'), {
+      target: { value: 'Una frase inspiradora' },
+    })
 
-    fireEvent.change(phraseInput, { target: { value: 'Nueva frase' } })
-    fireEvent.change(authorInput, { target: { value: 'Autor Test' } })
-    fireEvent.click(screen.getByTitle('Agregar frase'))
+    fireEvent.click(screen.getByText('Agregar frase'))
 
-    expect(phraseInput.value).toBe('')
-    expect(authorInput.value).toBe('')
+    await waitFor(() => {
+      expect(mockOnAdd).toHaveBeenCalledWith('Una frase inspiradora', '')
+      expect(mockOnClose).toHaveBeenCalled()
+    })
+  })
+
+  it('should reset inputs when closed', async () => {
+    render(<AddPhrase isOpen={true} onClose={mockOnClose} onAdd={mockOnAdd} />)
+
+    const textInput = screen.getByPlaceholderText('Escribe una nueva frase')
+    fireEvent.change(textInput, { target: { value: 'Prueba' } })
+
+    fireEvent.click(screen.getByTestId('x'))
+
+    expect(textInput).toHaveValue('')
   })
 })

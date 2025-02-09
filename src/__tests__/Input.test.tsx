@@ -4,7 +4,7 @@ import Input from '../presentation/components/Input'
 
 describe('Input', () => {
   it('renders correctly with label', () => {
-    render(<Input id="test-input" label="Nombre" onChangeValue={jest.fn()} />)
+    render(<Input id="test-input" label="Nombre" onChange={jest.fn()} />)
 
     expect(screen.getByLabelText('Nombre')).toBeInTheDocument()
   })
@@ -15,7 +15,7 @@ describe('Input', () => {
         id="test-input"
         label="Nombre"
         placeholder="Ingrese su nombre..."
-        onChangeValue={jest.fn()}
+        onChange={jest.fn()}
       />,
     )
 
@@ -24,16 +24,19 @@ describe('Input', () => {
     ).toBeInTheDocument()
   })
 
-  it('calls onChangeValue when typing', () => {
+  it('calls onChange when typing', () => {
     const handleChange = jest.fn()
-    render(
-      <Input id="test-input" label="Nombre" onChangeValue={handleChange} />,
-    )
+    render(<Input id="test-input" label="Nombre" onChange={handleChange} />)
 
     const input = screen.getByLabelText('Nombre')
     fireEvent.change(input, { target: { value: 'Marcelo' } })
 
-    expect(handleChange).toHaveBeenCalledWith('Marcelo')
+    expect(handleChange).toHaveBeenCalledTimes(1)
+    expect(handleChange).toHaveBeenCalledWith(
+      expect.objectContaining({
+        target: expect.objectContaining({ value: 'Marcelo' }),
+      }),
+    )
   })
 
   it('renders description when provided', () => {
@@ -42,7 +45,7 @@ describe('Input', () => {
         id="test-input"
         label="Contraseña"
         description="Debe ser de u minimo de 8 caracteres"
-        onChangeValue={jest.fn()}
+        onChange={jest.fn()}
       />,
     )
 
@@ -57,10 +60,24 @@ describe('Input', () => {
         id="email-input"
         label="Email"
         type="email"
-        onChangeValue={jest.fn()}
+        onChange={jest.fn()}
       />,
     )
 
     expect(screen.getByLabelText('Email')).toHaveAttribute('type', 'email')
+  })
+
+  it('renders an error message when error state be true', () => {
+    render(
+      <Input
+        id="email-input"
+        label="Email"
+        type="email"
+        onChange={jest.fn()}
+        error="Este campo es obligatorio"
+      />,
+    )
+
+    expect(screen.getByText('Este campo es obligatorio')).toBeInTheDocument()
   })
 })

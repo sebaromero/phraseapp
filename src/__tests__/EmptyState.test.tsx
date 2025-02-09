@@ -3,7 +3,7 @@ import '@testing-library/jest-dom'
 import EmptyState from '../presentation/components/EmptyState'
 
 jest.mock('lucide-react', () => ({
-  Inbox: () => <svg data-testid="inbox-icon" />,
+  BookOpenText: () => <svg data-testid="book-open-text-icon" />,
 }))
 
 describe('EmptyState', () => {
