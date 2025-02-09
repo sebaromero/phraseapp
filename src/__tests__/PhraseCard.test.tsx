@@ -12,6 +12,7 @@ const mockProps = {
   author: 'Charlie Chaplin',
   isDeleting: false,
   onDelete: jest.fn(),
+  color: 'rgba(255, 0, 0, 0.2)',
 }
 
 describe('PhraseCard', () => {
@@ -42,5 +43,12 @@ describe('PhraseCard', () => {
 
     const deleteButton = screen.getByRole('button', { name: 'Eliminar frase' })
     expect(deleteButton).toBeDisabled()
+  })
+
+  it('applies the correct background color', () => {
+    render(<PhraseCard {...mockProps} />)
+
+    const phraseCard = screen.getByRole('article')
+    expect(phraseCard).toHaveStyle('background-color: rgba(255, 0, 0, 0.2)')
   })
 })

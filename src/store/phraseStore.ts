@@ -1,6 +1,7 @@
 import { create } from 'zustand'
 import { IPhrase } from '../core/Phrase/phrase'
 import { IPhraseState } from '../core/Phrase/phraseState'
+import getRandomColor from '../utils/getRandomColor'
 
 export const usePhraseStore = create<IPhraseState>((set) => ({
   phrases: [],
@@ -9,7 +10,12 @@ export const usePhraseStore = create<IPhraseState>((set) => ({
   searchQuery: '',
 
   addPhrase: (text, author) => {
-    const newPhrase: IPhrase = { id: crypto.randomUUID(), text, author }
+    const newPhrase: IPhrase = {
+      id: crypto.randomUUID(),
+      text,
+      author,
+      color: getRandomColor(),
+    }
     set((state) => ({ phrases: [newPhrase, ...state.phrases] }))
   },
 

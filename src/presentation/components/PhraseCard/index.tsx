@@ -1,23 +1,26 @@
-import { useMemo } from 'react'
 import { Trash2 } from 'lucide-react'
 import ActionButton from '../ActionButton'
-import getRandomColor from '../../../utils/getRandomColor'
 
 interface IPhraseCard {
   author?: string | null
   isDeleting: boolean
   onDelete: VoidFunction
   text: string
+  color: string
 }
 
-const PhraseCard = ({ author, isDeleting, text, onDelete }: IPhraseCard) => {
-  const bgColor = useMemo(() => getRandomColor(), [text, author])
-
+const PhraseCard = ({
+  author,
+  isDeleting,
+  text,
+  color,
+  onDelete,
+}: IPhraseCard) => {
   return (
     <div
       role="article"
       className="relative p-4 rounded-md border border-gray-300"
-      style={{ backgroundColor: bgColor }}
+      style={{ backgroundColor: color }}
     >
       <p className="text-xl font-semibold text-gray-900">"{text}"</p>
       <p className="mt-2 text-md text-gray-500">- {author || 'Anónimo'}</p>

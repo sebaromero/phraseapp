@@ -28,6 +28,7 @@ const PhraseList = () => {
             key={phrase.id}
             text={phrase.text}
             author={phrase.author}
+            color={phrase.color}
             onDelete={() => removePhrase(phrase.id)}
             isDeleting={deletingIds?.includes(phrase.id)}
           />

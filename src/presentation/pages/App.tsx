@@ -1,4 +1,3 @@
-import { usePhraseStore } from '../../store/phraseStore'
 import AddPhrase from '../containers/AddPhrase'
 import Header from '../containers/Header'
 import PhraseList from '../containers/PhraseList'
