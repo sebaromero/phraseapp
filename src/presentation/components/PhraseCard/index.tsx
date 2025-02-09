@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { Trash2 } from 'lucide-react'
 import ActionButton from '../ActionButton'
-import getRandomColor from '../../../utilities/helpers/getRandomColor'
+import getRandomColor from '../../../utils/getRandomColor'
 
 interface IPhraseCard {
   author?: string | null

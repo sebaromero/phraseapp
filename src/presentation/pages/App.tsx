@@ -8,31 +8,12 @@ import { useModal } from '../../hooks/useModal'
 function App() {
   const { isOpen, openModal, closeModal } = useModal()
 
-  const {
-    phrases,
-    isLoading,
-    deletingIds,
-    searchQuery,
-    addPhrase,
-    removePhrase,
-    setSearch,
-  } = usePhraseStore()
-
   return (
     <Layout>
       <div className="flex flex-col gap-6">
-        <Header
-          searchValue={searchQuery}
-          onAddPhrase={openModal}
-          onSearchChange={setSearch}
-        />
-        <PhraseList
-          phrases={phrases}
-          isLoading={isLoading}
-          onDelete={removePhrase}
-          isDeleting={deletingIds}
-        />
-        <AddPhrase isOpen={isOpen} onClose={closeModal} onAdd={addPhrase} />
+        <Header onAddPhrase={openModal} />
+        <PhraseList />
+        <AddPhrase isOpen={isOpen} onClose={closeModal} />
       </div>
     </Layout>
   )

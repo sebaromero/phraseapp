@@ -1,4 +1,4 @@
-import getRandomColor from '../../utilities/helpers/getRandomColor'
+import getRandomColor from '../../utils/getRandomColor'
 
 describe('getRandomColor', () => {
   it('should return a valid rgb color with opacity 0.2', () => {

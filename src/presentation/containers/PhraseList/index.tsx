@@ -1,49 +1,38 @@
-import { memo, useEffect, useState } from 'react'
+import { memo } from 'react'
 import PhraseCard from '../../components/PhraseCard'
-import Skeleton from '../../components/Skeleton'
 import EmptyState from '../../components/EmptyState'
-import { IPhrase } from '../../../core/Phrase/phrase'
+import filterPhrases from '../../../utils/filterPhrases'
+import { usePhraseStore } from '../../../store/phraseStore'
 
-interface IPhraseList {
-  phrases: IPhrase[]
-  isLoading: boolean
-  onDelete: (id: string) => void
-  isDeleting: string[]
-}
+const PhraseList = () => {
+  const { phrases, deletingIds, searchQuery, removePhrase } = usePhraseStore()
+  const filteredPhrases = filterPhrases(phrases, searchQuery)
 
-const PhraseList = ({
-  phrases,
-  isLoading,
-  onDelete,
-  isDeleting,
-}: IPhraseList) => {
-  const [loadingState, setLoadingState] = useState(true)
+  if (!phrases.length) {
+    return <EmptyState />
+  }
 
-  useEffect(() => {
-    if (!isLoading) {
-      setTimeout(() => setLoadingState(false), 300)
-    }
-  }, [isLoading])
-
-  if (loadingState) return <Skeleton />
+  if (!filteredPhrases.length) {
+    return (
+      <div className="text-center text-gray-500 mt-6">
+        <p>No se encontraron resultados para tu búsqueda.</p>
+      </div>
+    )
+  }
 
   return (
     <section className="w-full mx-auto" aria-live="polite">
-      {phrases.length > 0 ? (
-        <div className="grid gap-4">
-          {phrases.map((phrase) => (
-            <PhraseCard
-              key={phrase.id}
-              text={phrase.text}
-              author={phrase.author}
-              onDelete={() => onDelete(phrase.id)}
-              isDeleting={isDeleting?.includes(phrase.id)}
-            />
-          ))}
-        </div>
-      ) : (
-        <EmptyState />
-      )}
+      <div className="grid gap-4">
+        {filteredPhrases.map((phrase) => (
+          <PhraseCard
+            key={phrase.id}
+            text={phrase.text}
+            author={phrase.author}
+            onDelete={() => removePhrase(phrase.id)}
+            isDeleting={deletingIds?.includes(phrase.id)}
+          />
+        ))}
+      </div>
     </section>
   )
 }

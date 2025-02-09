@@ -3,11 +3,11 @@ import { Plus } from 'lucide-react'
 import Input from '../../components/Input'
 import ActionButton from '../../components/ActionButton'
 import Modal from '../../components/Modal'
+import { usePhraseStore } from '../../../store/phraseStore'
 
 interface IAddPhrase {
   isOpen: boolean
   onClose: VoidFunction
-  onAdd: (text: string, author?: string) => void
 }
 
 interface IFormData {
@@ -15,7 +15,7 @@ interface IFormData {
   author?: string
 }
 
-const AddPhrase = ({ isOpen, onClose, onAdd }: IAddPhrase) => {
+const AddPhrase = ({ isOpen, onClose }: IAddPhrase) => {
   const {
     register,
     handleSubmit,
@@ -23,8 +23,10 @@ const AddPhrase = ({ isOpen, onClose, onAdd }: IAddPhrase) => {
     reset,
   } = useForm<IFormData>()
 
+  const { addPhrase } = usePhraseStore()
+
   const onSubmit = (data: { text: string; author?: string }) => {
-    onAdd(data.text, data.author)
+    addPhrase(data.text, data.author)
     reset()
     onClose()
   }
