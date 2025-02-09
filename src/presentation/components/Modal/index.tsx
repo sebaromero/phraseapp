@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 import { X } from 'lucide-react'
-import useModal from '../../../hooks/useModal'
 import ActionButton from '../ActionButton'
+import withModal from '../../../hocs/withModal'
 
 interface IModal {
   isOpen: boolean
@@ -11,8 +11,6 @@ interface IModal {
 }
 
 const Modal = ({ isOpen, onClose, title, children }: IModal) => {
-  useModal(isOpen, onClose)
-
   if (!isOpen) return null
 
   return (
@@ -43,4 +41,4 @@ const Modal = ({ isOpen, onClose, title, children }: IModal) => {
   )
 }
 
-export default Modal
+export default withModal(Modal)

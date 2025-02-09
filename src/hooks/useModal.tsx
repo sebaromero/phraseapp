@@ -1,23 +1,11 @@
-import { useEffect } from 'react'
+import { useState } from 'react'
 
-const useModal = (isOpen: boolean, onClose: VoidFunction) => {
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose()
-    }
+export const useModal = () => {
+  const [isOpen, setIsOpen] = useState(false)
 
-    if (isOpen) {
-      document.body.classList.add('overflow-hidden')
-      window.addEventListener('keydown', handleKeyDown)
-    } else {
-      document.body.classList.remove('overflow-hidden')
-    }
+  const openModal = () => setIsOpen(true)
 
-    return () => {
-      document.body.classList.remove('overflow-hidden')
-      window.removeEventListener('keydown', handleKeyDown)
-    }
-  }, [isOpen, onClose])
+  const closeModal = () => setIsOpen(false)
+
+  return { isOpen, openModal, closeModal }
 }
-
-export default useModal
