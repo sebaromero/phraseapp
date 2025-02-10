@@ -1,50 +1,88 @@
-# React + TypeScript + Vite
+# Phraseapp
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Descripción
 
-Currently, two official plugins are available:
+**Phraseapp** es una aplicación que permite agregar, buscar y eliminar frases. Las frases se muestran en una matriz de tarjetas con filtrado en tiempo real, lo que facilita su búsqueda y gestión.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Funcionalidades principales:
 
-## Expanding the ESLint configuration
+**Agregar frases**: Los usuarios pueden ingresar nuevas frases junto con su autor.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+**Buscar frases**: La aplicación cuenta con un campo de búsqueda para filtrar frases en tiempo real.
 
-- Configure the top-level `parserOptions` property like this:
+**Eliminar frases**: Se pueden eliminar frases de la lista con un solo clic.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Tecnologías utilizadas
+
+Este proyecto fue desarrollado con las siguientes tecnologías:
+
+- **React 19** como librería
+
+- **Vite** como bundler
+
+- **TypeScript** para tipado seguro
+
+- **Tailwind CSS** para estilos
+
+- **Zustand** como gestor de estado
+
+- **Storybook** para documentar componentes
+
+- **Jest** para pruebas unitarias
+
+- **Cypress** para pruebas end-to-end
+
+## Instalación y configuración
+
+### 1. Clonar el repositorio
+
+```
+git clone https://github.com/sebaromero/phraseapp.git
+cd phraseapp
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### 2. Instalar dependencias
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
 ```
+npm install
+```
+
+### 3. Ejecutar la aplicación
+
+```
+npm run dev
+```
+
+Por defecto, la aplicación se ejecutará en `http://localhost:3000`
+
+### Storybook
+
+Para visualizar y testear componentes de manera aislada, ejecutar:
+
+```
+npm run storybook
+```
+
+Esto abrirá Storybook en `http://localhost:6006`
+
+### Pruebas
+
+Ejecutar pruebas unitarias y de integración
+
+```
+npm run test
+```
+
+Ejecutar pruebas end-to-end con Cypress
+
+```
+npm run test:e2e
+```
+
+Desarrollado por **Sebastian Romero**
+
+📧 Contacto: [sebastianromero.dev@gmail.com](mailto:[sebastianromero.dev@gmail.com)
+
+💼 LinkedIn: [linkedin.com/in/romero-seba](linkedin.com/in/romero-seba)
+
+🐙 GitHub: [github.com/sebaromero](github.com/sebaromero)
