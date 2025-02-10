@@ -3,7 +3,7 @@ import { BookOpenText, SearchX } from 'lucide-react'
 import { usePhraseStore } from '../../../store/phraseStore'
 import PhraseCard from '../../components/PhraseCard'
 import EmptyState from '../../components/EmptyState'
-import filterPhrases from '../../../utils/filterPhrases'
+import filterPhrases from './utils/filterPhrases'
 
 const PhraseList = () => {
   const { phrases, deletingIds, searchQuery, removePhrase } = usePhraseStore()
