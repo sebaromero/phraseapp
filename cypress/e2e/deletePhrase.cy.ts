@@ -1,7 +1,7 @@
 describe('delete phrase', () => {
   it('should create and delete a phrase from the list', () => {
-    const phraseToAdd = 'La perseverancia es clave'
-    const author = 'Autor 1'
+    const phraseToAdd = 'Cada día sabemos más y entendemos menos'
+    const author = 'Albert Einstein'
 
     cy.visit('/')
 
