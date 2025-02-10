@@ -7,15 +7,22 @@ jest.mock('lucide-react', () => ({
   Plus: () => <svg data-testid="plus" />,
 }))
 
+const mockSetSearch = jest.fn()
+
+jest.mock('../store/phraseStore', () => ({
+  usePhraseStore: jest.fn(() => ({
+    searchQuery: '',
+    setSearch: mockSetSearch,
+  })),
+}))
+
 describe('Header', () => {
+  beforeEach(() => {
+    jest.clearAllMocks()
+  })
+
   it('renders the search input and add button', () => {
-    render(
-      <Header
-        searchValue=""
-        onSearchChange={jest.fn()}
-        onAddPhrase={jest.fn()}
-      />,
-    )
+    render(<Header onAddPhrase={jest.fn()} />)
 
     expect(screen.getByRole('searchbox')).toBeInTheDocument()
     expect(
@@ -23,31 +30,18 @@ describe('Header', () => {
     ).toBeInTheDocument()
   })
 
-  it('calls onSearchChange when typing in the search input', () => {
-    const onSearchChangeMock = jest.fn()
-    render(
-      <Header
-        searchValue=""
-        onSearchChange={onSearchChangeMock}
-        onAddPhrase={jest.fn()}
-      />,
-    )
+  it('seach any phrase when typing in the search input', () => {
+    render(<Header onAddPhrase={jest.fn()} />)
 
     const input = screen.getByRole('searchbox')
     fireEvent.change(input, { target: { value: 'Hola' } })
 
-    expect(onSearchChangeMock).toHaveBeenCalledWith('Hola')
+    expect(mockSetSearch).toHaveBeenCalledWith('Hola')
   })
 
-  it('calls onAddPhrase when clicking the add button', () => {
+  it('open modal when clicking the add button', () => {
     const onAddPhraseMock = jest.fn()
-    render(
-      <Header
-        searchValue=""
-        onSearchChange={jest.fn()}
-        onAddPhrase={onAddPhraseMock}
-      />,
-    )
+    render(<Header onAddPhrase={onAddPhraseMock} />)
 
     const button = screen.getByRole('button', { name: 'Agregar frase' })
     fireEvent.click(button)
