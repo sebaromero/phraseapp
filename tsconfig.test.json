@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "module": "NodeNext",
+    "types": ["jest", "@testing-library/jest-dom"],
+    "allowJs": true
+  }
+}

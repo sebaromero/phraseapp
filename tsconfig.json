@@ -2,6 +2,17 @@
   "files": [],
   "references": [
     { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ]
+    { "path": "./tsconfig.node.json" },
+    { "path": "./tsconfig.test.json" }
+  ],
+  "compilerOptions": {
+    "jsx": "react-jsx", 
+    "moduleResolution": "node",
+    "allowJs": true,
+    "types": ["cypress"],
+    "module": "ESNext",
+    "target": "ESNext",
+    "esModuleInterop": true,
+    "strict": true
+  }
 }
