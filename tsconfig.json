@@ -8,6 +8,11 @@
   "compilerOptions": {
     "jsx": "react-jsx", 
     "moduleResolution": "node",
-    "allowJs": true
+    "allowJs": true,
+    "types": ["cypress"],
+    "module": "ESNext",
+    "target": "ESNext",
+    "esModuleInterop": true,
+    "strict": true
   }
 }

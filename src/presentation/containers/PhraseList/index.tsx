@@ -41,7 +41,11 @@ const PhraseList = ({ phrases, searchQuery }: IPhraseList) => {
   }
 
   return (
-    <section className="w-full mx-auto" aria-live="polite">
+    <section
+      className="w-full mx-auto"
+      aria-live="polite"
+      data-testid="phrase-list"
+    >
       <div className="grid gap-4">
         {filteredPhrases.map((phrase) => (
           <PhraseCard
