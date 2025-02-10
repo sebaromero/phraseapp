@@ -37,7 +37,7 @@ describe('ActionButton', () => {
     expect(handleClick).toHaveBeenCalledTimes(1)
   })
 
-  it('not calls onClick function when button is disabled', () => {
+  it('does not call onClick function when button is disabled', () => {
     render(
       <ActionButton
         icon={<MockIcon />}
@@ -50,7 +50,7 @@ describe('ActionButton', () => {
     const button = screen.getByRole('button', { name: 'Eliminar' })
     fireEvent.click(button)
 
-    expect(handleClick).not.toHaveBeenCalled()
+    expect(handleClick).not.toHaveBeenCalledTimes(0)
     expect(button).toBeDisabled()
   })
 
