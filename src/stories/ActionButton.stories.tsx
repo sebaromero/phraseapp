@@ -14,7 +14,7 @@ const meta: Meta<typeof ActionButton> = {
 export default meta
 type Story = StoryObj<typeof ActionButton>
 
-export const Delete: Story = {
+export const Icon: Story = {
   args: {
     icon: <Trash />,
     onClick: () => {},
@@ -23,12 +23,13 @@ export const Delete: Story = {
   },
 }
 
-export const Edit: Story = {
+export const IconAndText: Story = {
   args: {
     icon: <Pencil />,
     onClick: () => {},
     ariaLabel: 'Editar',
     title: 'Editar elemento',
+    text: 'Editar',
   },
 }
 

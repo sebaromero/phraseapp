@@ -6,7 +6,6 @@ const meta: Meta<typeof Header> = {
   component: Header,
   tags: ['autodocs'],
   argTypes: {
-    onSearchChange: { action: 'search updated' },
     onAddPhrase: { action: 'add clicked' },
   },
 }
@@ -16,16 +15,6 @@ type Story = StoryObj<typeof Header>
 
 export const Default: Story = {
   args: {
-    searchValue: '',
-    onSearchChange: () => {},
-    onAddPhrase: () => {},
-  },
-}
-
-export const WithText: Story = {
-  args: {
-    searchValue: 'Ejemplo de búsqueda',
-    onSearchChange: () => {},
-    onAddPhrase: () => {},
+    onAddPhrase: () => alert('Modal de agregar frase'),
   },
 }

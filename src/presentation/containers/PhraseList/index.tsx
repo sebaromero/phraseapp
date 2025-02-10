@@ -4,9 +4,15 @@ import { usePhraseStore } from '../../../store/phraseStore'
 import PhraseCard from '../../components/PhraseCard'
 import EmptyState from '../../components/EmptyState'
 import filterPhrases from './utils/filterPhrases'
+import { IPhrase } from '../../../core/Phrase/phrase'
 
-const PhraseList = () => {
-  const { phrases, deletingIds, searchQuery, removePhrase } = usePhraseStore()
+interface IPhraseList {
+  phrases: IPhrase[]
+  searchQuery: string
+}
+
+const PhraseList = ({ phrases, searchQuery }: IPhraseList) => {
+  const { deletingIds, removePhrase } = usePhraseStore()
   const filteredPhrases = filterPhrases(phrases, searchQuery)
 
   if (!phrases.length) {

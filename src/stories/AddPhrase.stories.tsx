@@ -6,7 +6,6 @@ const meta: Meta<typeof AddPhrase> = {
   component: AddPhrase,
   argTypes: {
     onClose: { action: 'close' },
-    onAdd: { action: 'add phrase' },
   },
 }
 
@@ -18,9 +17,6 @@ export const Default: Story = {
   args: {
     isOpen: true,
     onClose: () => {},
-    onAdd: (text: string, author?: string) => {
-      console.log('Phrase added:', text, author)
-    },
   },
 }
 
@@ -28,6 +24,5 @@ export const ClosedModal: Story = {
   args: {
     isOpen: false,
     onClose: () => {},
-    onAdd: () => {},
   },
 }

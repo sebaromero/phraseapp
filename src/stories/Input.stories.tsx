@@ -5,9 +5,6 @@ const meta: Meta<typeof Input> = {
   title: 'Components/Input',
   component: Input,
   tags: ['autodocs'],
-  argTypes: {
-    onChangeValue: { action: 'changed' },
-  },
 }
 
 export default meta
@@ -55,5 +52,15 @@ export const Disabled: Story = {
     label: 'Campo deshabilitado',
     placeholder: 'No puedes ingresar ningun valor',
     disabled: true,
+  },
+}
+
+export const Error: Story = {
+  args: {
+    id: 'error-input',
+    label: 'Nombre de usuario',
+    placeholder: 'Ingresa un nombre de usuario',
+    disabled: true,
+    error: 'Este campo es obligatorio',
   },
 }
