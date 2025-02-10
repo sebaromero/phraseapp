@@ -12,7 +12,6 @@ interface IHeader {
 const Header = ({ onAddPhrase, searchQuery }: IHeader) => {
   const setSearch = usePhraseStore((state) => state.setSearch)
 
-  throw new Error('Error simulado')
   const handleSearchChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       setSearch(e.target.value)
