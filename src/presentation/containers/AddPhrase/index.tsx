@@ -1,40 +1,17 @@
-import { useForm } from 'react-hook-form'
 import { Plus } from 'lucide-react'
 import Input from '../../components/Input'
 import ActionButton from '../../components/ActionButton'
 import Modal from '../../components/Modal'
-import { usePhraseStore } from '../../../store/phraseStore'
+import useAddPhraseForm from './hooks/useAddPhraseForm'
 
 interface IAddPhrase {
   isOpen: boolean
   onClose: VoidFunction
 }
 
-interface IFormData {
-  text: string
-  author?: string
-}
-
 const AddPhrase = ({ isOpen, onClose }: IAddPhrase) => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm<IFormData>()
-
-  const { addPhrase } = usePhraseStore()
-
-  const onSubmit = (data: { text: string; author?: string }) => {
-    addPhrase(data.text, data.author)
-    reset()
-    onClose()
-  }
-
-  const handleClose = () => {
-    reset()
-    onClose()
-  }
+  const { errors, register, handleSubmit, onSubmit, handleClose } =
+    useAddPhraseForm(onClose)
 
   return (
     <Modal isOpen={isOpen} onClose={handleClose} title="Agregar nueva frase">

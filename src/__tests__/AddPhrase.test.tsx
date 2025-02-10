@@ -8,7 +8,12 @@ jest.mock('lucide-react', () => ({
   X: () => <svg data-testid="x" />,
 }))
 
-const mockOnAdd = jest.fn()
+jest.mock('../store/phraseStore', () => ({
+  usePhraseStore: jest.fn(() => ({
+    addPhrase: jest.fn(),
+  })),
+}))
+
 const mockOnClose = jest.fn()
 
 describe('AddPhrase', () => {
@@ -17,7 +22,7 @@ describe('AddPhrase', () => {
   })
 
   it('should render correctly when open', () => {
-    render(<AddPhrase isOpen={true} onClose={mockOnClose} onAdd={mockOnAdd} />)
+    render(<AddPhrase isOpen={true} onClose={mockOnClose} />)
 
     expect(
       screen.getByPlaceholderText('Escribe una nueva frase'),
@@ -26,39 +31,39 @@ describe('AddPhrase', () => {
   })
 
   it('should not render when closed', () => {
-    render(<AddPhrase isOpen={false} onClose={mockOnClose} onAdd={mockOnAdd} />)
+    render(<AddPhrase isOpen={false} onClose={mockOnClose} />)
 
     expect(screen.queryByPlaceholderText('Escribe una nueva frase')).toBeNull()
   })
 
   it('should show error when submitting without text', async () => {
-    render(<AddPhrase isOpen={true} onClose={mockOnClose} onAdd={mockOnAdd} />)
+    render(<AddPhrase isOpen={true} onClose={mockOnClose} />)
 
     fireEvent.click(screen.getByText('Agregar frase'))
 
     expect(
       await screen.findByText('La frase es obligatoria.'),
     ).toBeInTheDocument()
-    expect(mockOnAdd).not.toHaveBeenCalled()
+    expect(mockOnClose).not.toHaveBeenCalled()
   })
 
-  it('should call onAdd and close modal on valid submission', async () => {
-    render(<AddPhrase isOpen={true} onClose={mockOnClose} onAdd={mockOnAdd} />)
+  it('should call onClose and reset inputs on valid submission', async () => {
+    render(<AddPhrase isOpen={true} onClose={mockOnClose} />)
 
-    fireEvent.change(screen.getByPlaceholderText('Escribe una nueva frase'), {
-      target: { value: 'Una frase inspiradora' },
-    })
+    const textInput = screen.getByPlaceholderText('Escribe una nueva frase')
+    fireEvent.change(textInput, { target: { value: 'Una frase inspiradora' } })
 
     fireEvent.click(screen.getByText('Agregar frase'))
 
     await waitFor(() => {
-      expect(mockOnAdd).toHaveBeenCalledWith('Una frase inspiradora', '')
       expect(mockOnClose).toHaveBeenCalled()
     })
+
+    expect(textInput).toHaveValue('')
   })
 
   it('should reset inputs when closed', async () => {
-    render(<AddPhrase isOpen={true} onClose={mockOnClose} onAdd={mockOnAdd} />)
+    render(<AddPhrase isOpen={true} onClose={mockOnClose} />)
 
     const textInput = screen.getByPlaceholderText('Escribe una nueva frase')
     fireEvent.change(textInput, { target: { value: 'Prueba' } })

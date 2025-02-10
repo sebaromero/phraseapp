@@ -1,17 +1,17 @@
 import { create } from 'zustand'
+import { v4 as uuidv4 } from 'uuid'
 import { IPhrase } from '../core/Phrase/phrase'
 import { IPhraseState } from '../core/Phrase/phraseState'
 import getRandomColor from '../utils/getRandomColor'
 
 export const usePhraseStore = create<IPhraseState>((set) => ({
   phrases: [],
-  isLoading: false,
   deletingIds: [],
   searchQuery: '',
 
   addPhrase: (text, author) => {
     const newPhrase: IPhrase = {
-      id: crypto.randomUUID(),
+      id: uuidv4(),
       text,
       author,
       color: getRandomColor(),
@@ -34,6 +34,5 @@ export const usePhraseStore = create<IPhraseState>((set) => ({
     }, 1000)
   },
 
-  setLoading: (loading) => set(() => ({ isLoading: loading })),
   setSearch: (query) => set(() => ({ searchQuery: query })),
 }))
