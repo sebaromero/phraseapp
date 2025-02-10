@@ -22,7 +22,7 @@ const PhraseCard = ({
       className="relative p-4 rounded-md border border-gray-300"
       style={{ backgroundColor: color }}
     >
-      <p className="text-xl font-semibold text-gray-900">"{text}"</p>
+      <p className="text-xl font-semibold text-gray-900">&quot;{text}&quot;</p>
       <p className="mt-2 text-md text-gray-500">- {author || 'Anónimo'}</p>
       <div className="absolute top-2 right-2">
         <ActionButton
